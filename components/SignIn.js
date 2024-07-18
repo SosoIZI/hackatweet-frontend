@@ -1,76 +1,67 @@
 import { useState } from 'react';
-import Link from 'next/link';
+const mongoose = require('mongoose');
+// import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../reducers/user';
+import Image from 'next/image';
+const fetch = require('node-fetch');
 
-function SignIn() {
 
-        const [SignUpfirstname, setSignUpfirstname] = useState('')
-        const [SignUpusername, setSignUpusername] = useState('')
-        const [SignUppassword, setSignUppassword] = useState('')
+// pop-up Créer un compte
+
+function SignIn(props) {
+
+    const user = useSelector((state) => state.user.value);
+    const dispatch = useDispatch (); 
+
+        
+        const [SignInusername, setSignInusername] = useState('')
+        const [SignInpassword, setSignInpassword] = useState('')
     
-
-        const handleSignUp= () => {
-            fetch('http://localhost:3000/users/signup', {
+        const handleSignIn = () => {
+            fetch('http://localhost:3000/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: signUpUsername, password: signUpPassword }),
+                body: JSON.stringify({username: SignInusername, password: SignInpassword}),
             }).then(response => response.json())
                 .then(data => {
                     if (data.result) {
-                        dispatch(login({ username: signUpUsername, token: data.token }));
-                        setSignUpfirstname('');
-                        setSignUpusername('');
-                        setSignUppassword
-                        // setIsModalVisible(false)
+                        dispatch(signIn({ username: SignInusername, token: data.token }));
+                        setSignInusername('');
+                        setSignInpassword('')
                     }
                 });
         };
 
 
+        const handleClick = () => {
+            props.toggle()
+          };
 
-        // function handleLogin(e) {
-        //     e.preventDefault()
-        //     // dispatch()
-        //     props.toggle()
-        // }
-
-        const changePage = () => {
-
-        }
-
-    
+        //   const handleButton = () => {
+        //     return <Link href="/Home"/>
+        //   }
+         
         return (
 
             <div className="popup">
                 <div className="popup-inner">
 
-                    <button OnClick={() => } type="close">X</button>
+                    <button onClick={() => handleClick()} type="close">X</button>
 
                     <Image
-                    src="https://get-picto.com/gratuit/logo-twitter-noir-png/"
+                    src="/logo-twitter-noir-png.png"
                     alt="Logo"
                     width={50}
-                    height={50} />
-
-                    <h2>Create your Hackatweet account</h2>
-                    <form onSubmit={handleLogin}>
-
-                        <label>
-                            Firstame:
-                            <input type="text" value={firstname} onChange={e =>} placeholder="Firstname"/>
-                        </label>
-
-                        <label>
-                            Username:
-                            <input type="text" value={username} onChange={e => } placeholder="Username" />
-                        </label>
-
-                        <label>
-                            Password:
-                            <input type="password" value={password} onChange={e => } placeholder="Password"/>
-                        </label>
-                        
-                        <button type="submit"></button>
-                    </form>
+                    height={50} 
+                    />
+                  
+                    <h2>Connect to Hackatweet</h2>
+                        <form>
+                            <input type="text" value={SignInusername} onChange={e => setSignInusername(e.target.value)} placeholder="Username" />
+                            <input type="password" value={SignInpassword} onChange={e => setSignInpassword(e.target.value)} placeholder="Password"/>
+                            <button  type="submit" onClick={() => handleSignIn() }>Sign in</button>
+                         </form>
                 </div>
             </div>
         )
