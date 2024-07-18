@@ -1,22 +1,48 @@
-.main {
+.profilPic {
+  border-radius: 50px;
+}
+
+.homeContainer {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  border: 1px #e94653 solid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.homeHeader {
+  border: 1px #e94653 solid;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
+  justify-content: space-between;
 }
 
-.title {
-  line-height: 1.15;
-  font-size: 4rem;
+.newTweetContainer {
+  border: 1px #e94653 solid;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 5;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.lastTweetContainer {
+  border: 1px #e94653 solid;
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 2;
+  grid-column-end: 5;
 }
 
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+.trendsPageContainer {
+  border: 1px #e94653 solid;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  grid-column-start: 5;
+  grid-column-end: 6;
 }
+
