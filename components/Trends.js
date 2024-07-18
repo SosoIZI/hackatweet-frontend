@@ -3,7 +3,7 @@ import styles from '../styles/Trends.module.css'
 function Trends(props) {
 
     let hashtag = Object.keys(props.hash)
-    let NbTweet = props.hash.hashtag
+    let NbTweet = props.hash[hashtag]
 
     return (
         <div className={styles.oneTrend}>
