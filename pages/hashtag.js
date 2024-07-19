@@ -1,7 +1,8 @@
 import Hashtag from '../components/Hashtag';
 
+
 function HashtagPage() {
-  return <Hashtag />;
+  return <Hashtag onHashtagPage={true} />;
 }
 
 export default HashtagPage;

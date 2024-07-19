@@ -1,20 +1,23 @@
 import styles from '../styles/Tweet.module.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 function Tweet(props) {
 
-    const dispatch = useDispatch();
     const token = useSelector((state) => state.user.value.token);
-    //console.log('token', token)
+
+      //  je récupère la hashtag de l'URL (elle sera pas défaut dans la searchbar)
+      let url = new URL( window.location.href);
+      let hash = url.hash
+      //console.log('le hashtag dans lurl est', hash )
+      const [searchValue, setSearchValue] = useState(hash);
+      //console.log('token', token)
 
     const [postContent, setPostContent] = useState('');
     const regex =  /#\w+/gi;
     // const texte = "Voici un exemple de #react et #javascript.";
      const hachhtag = postContent.match(regex)
     // console.log('les hachtag de la phrase sont', hachhtag)
-
 
     //quand je clique sur "Tweet" j'enregistre ce tweet dans ma BDD.
     const addTweet = () => {
@@ -35,11 +38,31 @@ function Tweet(props) {
 			})      
         }
 
+        const newSearch = () => {
+            window.location = `/hashtag?hash=${searchValue}`;
+        }
+
     return (
+        <form onSubmit={newSearch}>
         <div className={styles.tweetContainer}>
-            <h1 className={styles.homeWord} >Home</h1>
+
+                {props.onHashtagPage ? 
+                (<h1 className={styles.homeWord} >Hashtag</h1>) : 
+                (<h1 className={styles.homeWord} >Home</h1>)}
             <div className={styles.textTweetContainer}>
-                <textarea 
+            
+            {props.onHashtagPage ? 
+            (<div>
+                <input defaultValue={searchValue} onChange={(e) => setSearchValue(e.target.value)}
+                style={{backgroundColor: 'rgb(34, 34, 34)', 
+                color: "white",
+                border: 'none',
+                borderRadius : '15px',
+                width: '600px',   
+                height: '30px',
+                }}/>
+              </div>) : 
+            (<textarea 
                 placeholder="What's up?" 
                 id="tweet" 
                 name="tweet" 
@@ -53,15 +76,19 @@ function Tweet(props) {
                     borderRightColor: 'black',
                     borderBottomColor: 'grey',
                     borderLeftColor: 'black'}}
-                />
+                />) }
             </div>
-            <div className={styles.textTweetCompteurAndButton}>
+            
+            {props.onHashtagPage ? 
+            (<> </>) : 
+            (<div className={styles.textTweetCompteurAndButton}>
                 <p>{postContent.length}/280</p>
                 <button className={styles.postTweetButton} onClick={() => addTweet()}> 
                     Tweet
-                </button>
-            </div>
+                </button></div>)}
+            
         </div>
+        </form>
     );
 }
 
