@@ -35,6 +35,17 @@ function Tweet(props) {
 			})      
         }
 
+    const HandleLike = () => {
+        fetch(`http://localhost:3000/tweets/${token}/${id}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({}),
+        }).then(response => response.json())
+            .then(data => {
+                
+            })
+        }
+
     return (
         <div className={styles.tweetContainer}>
             <h1 className={styles.homeWord} >Home</h1>
