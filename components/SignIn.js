@@ -29,6 +29,7 @@ function SignIn(props) {
                         dispatch(signIn({ username: SignInusername, token: data.token }));
                         setSignInusername('');
                         setSignInpassword('')
+                        
                     }
                 });
         };
@@ -38,16 +39,14 @@ function SignIn(props) {
             props.toggle()
           };
 
-        //   const handleButton = () => {
-        //     return <Link href="/Home"/>
-        //   }
+          const handleButton = () => {
+            return <Link href="/Home"/>
+          }
          
         return (
 
             <div className="popup">
                 <div className="popup-inner">
-
-                    <button onClick={() => handleClick()} type="close">X</button>
 
                     <Image
                     src="/logo-twitter-noir-png.png"
@@ -55,12 +54,15 @@ function SignIn(props) {
                     width={50}
                     height={50} 
                     />
-                
+
+                    
+                    <button onClick={() => handleClick()} type="close">X</button>
+                  
                     <h2>Connect to Hackatweet</h2>
                         <form>
                             <input type="text" value={SignInusername} onChange={e => setSignInusername(e.target.value)} placeholder="Username" />
                             <input type="password" value={SignInpassword} onChange={e => setSignInpassword(e.target.value)} placeholder="Password"/>
-                            <button  type="submit" onClick={() => handleSignIn() }>Sign in<Link href="/Home"/></button>
+                            <button  type="submit" onClick={() => handleSignIn() }>Sign in</button>
                          </form>
                 </div>
             </div>
