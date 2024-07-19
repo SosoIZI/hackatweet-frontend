@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import Link from 'next/link';
+import Link from 'next/link';
 const mongoose = require('mongoose');
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from '../reducers/user';
@@ -62,7 +62,9 @@ function SignUp(props) {
                             <input type="text" value={SignUpfirstname} onChange={e => setSignUpfirstname(e.target.value)} placeholder="Firstname"/>
                             <input type="text" value={SignUpusername} onChange={e =>  setSignUpusername(e.target.value)} placeholder="Username" />
                             <input type="password" value={SignUppassword} onChange={e => setSignUppassword(e.target.value)} placeholder="Password"/>
+                            <Link href="/tweet">
                             <button type="submit" onClick={() => handleSignUp() }>Sign up</button>
+                            </Link>
                     </div>
                 </div>
             </div>

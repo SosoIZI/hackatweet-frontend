@@ -3,12 +3,17 @@ import LastTweets from '../components/LastTweets';
 import Trends from '../components/Trends';
 import Tweet from '../components/Tweet';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { logout } from '../reducers/user';
 
 function Home() {
 
   const [tweets, setTweets] = useState([]);
   const [needAMajOfTweet, setNeedAMajOfTweet] = useState(false);
+  const dispatch = useDispatch();
     
   // au chargement de la page, j'affiche tous les tweets de la base de données
   // je mets à jour cet affichage à chaque fois que needAMajOfTweet change, 
@@ -69,10 +74,23 @@ function Home() {
     //j'obtiens un tableau avec des objets avec tous les hashtag et le nombre de fois où ils apparaissent
     
     const hashTrend = finalTab.map((data, i) => {
-      console.log('data', data)
+      //console.log('data', data)
       return <Trends key={i} hash={data} />}
     );
     
+    const username = useSelector((state) => state.user.value.username);
+    const firstname = useSelector((state) => state.user.value.firstname);
+    const token = useSelector((state) => state.user.value.token);
+    // console.log('username', username)
+    // console.log('firstname', firstname)
+    // console.log('token', token)
+
+    const logoutClick = () => {
+      dispatch(logout());
+    }
+
+    const etatRedux = useSelector((state) => state.user.value);
+     // console.log('etatRedux', etatRedux)
 
   return (
     <div className={styles.homeContainer}>
@@ -93,9 +111,11 @@ function Home() {
             />
           </div>
           <div className={styles.profilInfos}>
-            <p>John <br></br>@JohnCena</p>
+            <p>{firstname} <br></br>{username}</p>
             <br></br>
-            <button className={styles.logoutButton}>LOGOUT</button>
+            <Link href="/">
+            <button className={styles.logoutButton} onClick={() => logoutClick()} >LOGOUT</button>
+            </Link>
           </div>  
         </div>
       </div>

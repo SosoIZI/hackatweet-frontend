@@ -2,9 +2,17 @@ import styles from '../styles/LastTweets.module.css'
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function LastTweets(props) {
+
+    const dispatch = useDispatch();
+    const username = useSelector((state) => state.user.value.username);
+    const firstname = useSelector((state) => state.user.value.firstname);
+    const token = useSelector((state) => state.user.value.token);
+    //console.log('props.user est ', props.user)
 
     const [isLiked, setIsLiked] = useState(false);
 
@@ -28,28 +36,49 @@ function LastTweets(props) {
         // si letokendugars est présent dans le tableau nbLike dans la BDD
         // cette route retire 1 like
 
-        fetch(`http://localhost:3000/addLike/${letokendugars}`)
+        fetch(`http://localhost:3000/addLike/${token}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
+          //console.log(data)
           props.addLike(props.tweet)
         });
     }
 
     // je rajoute l'icone "trash" seulement si le tweet appartient à l'utilisateur connecté
     let trashIcon = <span></span>
-    if (letokendugars == 'John' /* props.pseudo */) {
+    if (props.user.username == username /* props.pseudo */) {
      trashIcon = <span><FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteTweet()}/></span>
     } 
 
     const deleteTweet = () => {
-        fetch(`http://localhost:3000/tweets/deleteTweet/${props.id}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          props.delete(props.tweet)
-        });
-    }
+        fetch(`http://localhost:3000/tweets/${props._id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+         .then(response => response.json())
+         .then(data => {
+           //console.log(data);
+           props.delete(props.tweet)
+         });
+        }
+
+        // Je veux savoir depuis combien de temps le tweet a été fait
+        let maintenant = new Date();
+        let dateTweet = new Date(props.date); // La date et l'heure de publication du tweet doivent être converties en objet Date
+
+        function dateDiffInHours(dateold, datenew) {
+            // Calcul de la différence en millisecondes
+            let diffInMilliseconds = datenew - dateold;
+
+            // Conversion des millisecondes en heures
+            let diffInHours = diffInMilliseconds / (1000 * 60 * 60);
+            return diffInHours;
+        }
+
+        let hoursDiff = dateDiffInHours(dateTweet, maintenant);
+        let delay = Math.trunc(hoursDiff)
+    
+
 
     return (
         <div className={styles.oneTweetContainer}>
@@ -62,12 +91,11 @@ function LastTweets(props) {
                 />
                 </div>
                 <div className={styles.pseudoAuthorContainer}>
-                <p>John   @JohnCena    - {props.date} </p> 
+                <p>{props.user.username}  {props.user.firstname}  - {delay} hour(s) </p> 
                 </div>
             </div>
             <div className={styles.tweetContent}>
                 <p>{props.tweet}</p>
-                <p>{props.hashtag}</p>
             </div>
             <div className={styles.tweetActions}>
                 <span><FontAwesomeIcon icon={faHeart} style={heartIconStyle} className="like" onClick={() => addNewLike()} /></span>
