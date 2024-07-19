@@ -1,0 +1,23 @@
+.oneTweetContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-color: grey;
+    border: 1px solid;
+}
+
+.tweetAuthorContainer {
+    display: flex;
+}
+
+.tweetContent {
+    display: flex;
+}
+
+.tweetActions {
+    display: flex;
+}
+
+.p {
+    margin : 15px;
+}
