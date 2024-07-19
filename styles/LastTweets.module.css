@@ -1,0 +1,33 @@
+.oneTweetContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    border-color: grey;
+    border: 1px solid;
+}
+
+.tweetAuthorContainer {
+    display: flex;
+}
+
+.profilLogo {
+    display: flex;
+    align-items: center;
+}
+
+.tweetContent {
+    display: flex;
+}
+
+.tweetActions {
+    display: flex;
+    align-items: center;
+}
+
+.p {
+    margin-left : 150px;
+}
+
+.pseudoAuthorContainer {
+    margin-left: 20px;
+}

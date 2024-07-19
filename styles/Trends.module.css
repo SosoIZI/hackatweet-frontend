@@ -1,0 +1,17 @@
+.oneTrend {
+    background-color: rgb(34, 34, 34);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.hashtagTrend {
+    padding: 0px;
+    margin: 10px;
+}
+
+.hashtagTrendCounter {
+    padding: 0px;
+    margin: 10px;
+    color: grey;
+}
