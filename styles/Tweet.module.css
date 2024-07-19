@@ -1,21 +1,18 @@
 .tweetContainer {
     display : grid;
-    border: 2px #f1f521 solid;
     grid-template-rows: repeat(3, 1fr);
     margin: 0;
     padding: 0;
 }
 
 .homeWord {
-    border: 2px #f1f521 solid;
     grid-row-start: 1;
     grid-row-end: 2;
-    margin: 0;
+    margin: 5px 10px;
     padding: 0;
 }
 
 .textTweetContainer {
-    border: 2px #f1f521 solid;
     grid-row-start: 2;
     grid-row-end: 3;
     display: flex;
@@ -32,7 +29,6 @@
     flex-direction: row;
     justify-content: right;
     align-items: center;
-    border: 2px #f1f521 solid;
     grid-row-start: 3;
     grid-row-end: 4;
     margin: 0;

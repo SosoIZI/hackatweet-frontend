@@ -37,12 +37,13 @@ function LastTweets(props) {
     }
 
     // je rajoute l'icone "trash" seulement si le tweet appartient à l'utilisateur connecté
+    let trashIcon = <span></span>
     if (letokendugars == 'John' /* props.pseudo */) {
-    const trashIcon = <span><FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteTweet()}/></span>
+     trashIcon = <span><FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteTweet()}/></span>
     } 
 
     const deleteTweet = () => {
-        fetch(`http://localhost:3000/deleteTweet`)
+        fetch(`http://localhost:3000/tweets/deleteTweet/${props.id}`)
         .then(response => response.json())
         .then(data => {
           console.log(data)
@@ -53,12 +54,16 @@ function LastTweets(props) {
     return (
         <div className={styles.oneTweetContainer}>
             <div className={styles.tweetAuthorContainer}>
+                <div className={styles.profilLogo}>
                 <Image src="/image_profil.webp" alt="Profil" 
-                    width={100} 
-                    height={70} 
-                    style={{borderRadius: '100px'}}
+                    width={50} 
+                    height={40} 
+                    style={{borderRadius: '100px', objectFit : 'contain'}}
                 />
+                </div>
+                <div className={styles.pseudoAuthorContainer}>
                 <p>John   @JohnCena    - {props.date} </p> 
+                </div>
             </div>
             <div className={styles.tweetContent}>
                 <p>{props.tweet}</p>

@@ -5,37 +5,22 @@ import Tweet from '../components/Tweet';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-function Home() {
+function Hashtag() {
 
   const [tweets, setTweets] = useState([]);
-  const [needAMajOfTweet, setNeedAMajOfTweet] = useState(false);
     
-  // au chargement de la page, j'affiche tous les tweets de la base de données
-  // je mets à jour cet affichage à chaque fois que needAMajOfTweet change, 
-  // c'est à dire quand je clique sur le boutton "tweet" dans le component "Tweet"
+  // au chargement de la page, j'affiche les data filtrées en fonction du hashtag cliqué
 
   useEffect(() => {
       fetch('http://localhost:3000/tweets')
         .then(response => response.json())
         .then(data => {
           //console.log('data' ,data)
-          setTweets(data.tweet.reverse())
+          setTweets(data.tweet.reverse()) // rajouter un filter
         });
-    }, [needAMajOfTweet]);
+    }, []);
 
-   // console.log('le tableau tweets est ', tweets)
-
-    // A chaque fois qu'un tweet est rajouté, je lui dis qu'il faut 
-    // une MAJ de l'affichage des tweets pour rajouter ce tweet à l'affichage
-
-    const newTweetAdded = () => {
-      setNeedAMajOfTweet(!needAMajOfTweet)
-      //console.log('la BDD Tweet a besoin dune MAJ', needAMajOfTweet)
-    }
-
-    // Chaque Tweet que j'ai récupéré dans mon fetch a été mis dans le tableau tweets
-    // je tranforme chaque élément de ce tableau en élément "LastTweets" pour qu'ils apparaissent 
-    // dans le component "LastTweets"
+    // console.log('le tableau tweets est ', tweets)
 
     const lastTweets = tweets.map((data, i) => {
       return <LastTweets key={i} {...data} addLike={newTweetAdded} delete={newTweetAdded}/>}
@@ -115,4 +100,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Hashtag;

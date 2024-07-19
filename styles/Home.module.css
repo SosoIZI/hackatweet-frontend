@@ -1,18 +1,26 @@
 .profilPic {
   border-radius: 50px;
+  margin: 20px;
+}
+
+.logoutButton {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-color: white;
+  color:aliceblue;
+  border-radius: 15px;
+  background-color: black;
 }
 
 .homeContainer {
   width: 100vw;
   height: 100vh;
   display: grid;
-  border: 1px #e94653 solid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(5, 1fr);
 }
 
 .homeHeader {
-  border: 1px #e94653 solid;
   grid-row-start: 1;
   grid-row-end: 6;
   grid-column-start: 1;
@@ -23,7 +31,7 @@
 }
 
 .newTweetContainer {
-  border: 1px #e94653 solid;
+  border: 1px #afafaf solid;
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 2;
@@ -31,7 +39,7 @@
 }
 
 .lastTweetContainer {
-  border: 1px #e94653 solid;
+  border: 1px #a8a4a4 solid;
   grid-row-start: 2;
   grid-row-end: 6;
   grid-column-start: 2;
@@ -39,10 +47,19 @@
 }
 
 .trendsPageContainer {
-  border: 1px #e94653 solid;
+  border: 1px #a0a0a0 solid;
   grid-row-start: 1;
   grid-row-end: 6;
   grid-column-start: 5;
   grid-column-end: 6;
 }
 
+.birdContainer {
+  margin:20px;
+  padding-left: 10px;
+}
+
+.profilContainer {
+  display: flex;
+
+}
