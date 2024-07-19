@@ -34,7 +34,7 @@ function Home() {
     }
 
     // Chaque Tweet que j'ai récupéré dans mon fetch a été mis dans le tableau tweets
-    // je tranforme chaque élément de ce tableau en élément "LastTweets" pour qu'ils apparaissent 
+    // je transforme chaque élément de ce tableau en élément "LastTweets" pour qu'ils apparaissent 
     // dans le component "LastTweets"
 
     const lastTweets = tweets.map((data, i) => {

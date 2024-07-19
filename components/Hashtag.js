@@ -9,7 +9,7 @@ function Hashtag() {
 
   const [tweets, setTweets] = useState([]);
     
-  // au chargement de la page, j'affiche les data filtrées en fonction du hashtag cliqué
+  // au chargement de la page, j'affiche les data filtrées en fonction du hashtag cliqué.
 
   useEffect(() => {
       fetch('http://localhost:3000/tweets')
@@ -29,7 +29,7 @@ function Hashtag() {
     // ne garder que des hastag uniques 
     let hashtagTab = []
     for (const obj of tweets) {
-      if (obj.hashtag && obj.hashtag.length>0)
+    if (obj.hashtag && obj.hashtag.length>0)
       hashtagTab.push(obj.hashtag)
     }
     console.log( 'le hashtagTab est  ', hashtagTab) // c'est un tableau avec tous mes #

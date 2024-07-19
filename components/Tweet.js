@@ -7,6 +7,7 @@ function Tweet(props) {
     const regex =  /#\w+/gi;
     // const texte = "Voici un exemple de #react et #javascript.";
      const hachhtag = postContent.match(regex)
+   
     // console.log('les hachtag de la phrase sont', hachhtag)
 
 
@@ -17,7 +18,7 @@ function Tweet(props) {
         console.log('hashtag créé est', hachhtag)
         console.log('tweet créé est', postContent)
 
-        fetch('http://localhost:3000/tweets', {
+        fetch('http://localhost:3000/tweets/', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ tweet: postContent, hashtag: hachhtag, nbLike: [{0:0}], date: new Date()}),
