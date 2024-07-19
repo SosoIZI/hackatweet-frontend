@@ -1,6 +1,6 @@
 import { useState } from 'react';
 const mongoose = require('mongoose');
-// import Link from 'next/link';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../reducers/user';
 import Image from 'next/image';
@@ -13,7 +13,6 @@ function SignIn(props) {
 
     const user = useSelector((state) => state.user.value);
     const dispatch = useDispatch (); 
-
         
         const [SignInusername, setSignInusername] = useState('')
         const [SignInpassword, setSignInpassword] = useState('')
@@ -62,7 +61,9 @@ function SignIn(props) {
                         <form>
                             <input type="text" value={SignInusername} onChange={e => setSignInusername(e.target.value)} placeholder="Username" />
                             <input type="password" value={SignInpassword} onChange={e => setSignInpassword(e.target.value)} placeholder="Password"/>
+                            <Link href="/tweet">
                             <button  type="submit" onClick={() => handleSignIn() }>Sign in</button>
+                            </Link>
                          </form>
                 </div>
             </div>

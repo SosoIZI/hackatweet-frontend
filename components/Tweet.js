@@ -1,7 +1,13 @@
 import styles from '../styles/Tweet.module.css';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function Tweet(props) {
+
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.user.value.token);
+    //console.log('token', token)
 
     const [postContent, setPostContent] = useState('');
     const regex =  /#\w+/gi;
@@ -12,18 +18,18 @@ function Tweet(props) {
 
     //quand je clique sur "Tweet" j'enregistre ce tweet dans ma BDD.
     const addTweet = () => {
-        console.log('date créé est', new Date())
-        console.log('nbLike créé est', '0')
-        console.log('hashtag créé est', hachhtag)
-        console.log('tweet créé est', postContent)
+        // console.log('date créé est', new Date())
+        // console.log('nbLike créé est', '0')
+        // console.log('hashtag créé est', hachhtag)
+        // console.log('tweet créé est', postContent)
 
-        fetch('http://localhost:3000/tweets', {
+        fetch(`http://localhost:3000/tweets/${token}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ tweet: postContent, hashtag: hachhtag, nbLike: [{0:0}], date: new Date()}),
+			body: JSON.stringify({ tweet: postContent, hashtag: hachhtag, date: new Date()}),
 		}).then(response => response.json())
 			.then(data => {
-				console.log('le tweet rajouté dans la BDD est', data)
+				//console.log('le tweet rajouté dans la BDD est', data)
                 props.newTweetAdded();
                 setPostContent('')
 			})      

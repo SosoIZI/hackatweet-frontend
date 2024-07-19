@@ -2,7 +2,9 @@ import styles from '../styles/Trends.module.css'
 
 function Trends(props) {
 
+   // console.log('props.hash est ', props.hash )
     let hashtag = Object.keys(props.hash)
+   // console.log('hashtag est ', hashtag )
     let NbTweet = props.hash[hashtag]
 
     return (

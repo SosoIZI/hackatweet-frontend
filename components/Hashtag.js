@@ -3,6 +3,7 @@ import LastTweets from '../components/LastTweets';
 import Trends from '../components/Trends';
 import Tweet from '../components/Tweet';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 function Hashtag() {
@@ -63,11 +64,13 @@ function Hashtag() {
     <div className={styles.homeContainer}>
       <div className={styles.homeHeader}>
         <div className={styles.birdContainer}>
+        <Link href="/tweet">
           <Image src="/tweeter_bird.png" alt="Logo" 
           width={50} 
           height={70} 
           style={{transform: 'rotate(180deg)'}}
           />
+          </Link>
         </div>
         <div className={styles.profilContainer}>
           <div className={styles.profilPic}>
